@@ -1,12 +1,15 @@
 require('dotenv').config(); // Carregar as variáveis do arquivo .env
 
 const express = require('express');
+const fs = require('fs');
+const TelegramBot = require('node-telegram-bot-api');
 const app = express();
 const port = process.env.PORT || 3000; // Usa a variável de ambiente PORT ou a porta 3000
 
-// Iniciar o bot
-const TelegramBot = require('node-telegram-bot-api');
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN);
+// Variáveis de ambiente do Telegram Bot
+const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+const chatId = process.env.TELEGRAM_GROUP_IDS;
+const bot = new TelegramBot(telegramToken, { polling: true });
 
 // Função para gerar uma recomendação aleatória
 function gerarRecomendacao() {
@@ -78,15 +81,23 @@ function gerarMensagem(jogo) {
 
 // Função para enviar sinal com informações do jogo
 async function enviarSinal(jogo) {
-  const mensagem = gerarMensagem(jogo);
-  await bot.sendPhoto(process.env.TELEGRAM_GROUP_IDS, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
+  try {
+    const mensagem = gerarMensagem(jogo);
+    await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
+  } catch (error) {
+    console.error('Erro ao enviar sinal:', error);
+  }
 }
 
 // Função para gerar sinais automáticos
 function gerarSinaisAutomaticos() {
-  const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
-  const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
-  enviarSinal(jogoAleatorio);
+  try {
+    const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
+    const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
+    enviarSinal(jogoAleatorio);
+  } catch (error) {
+    console.error('Erro ao ler jogos coletados:', error);
+  }
 }
 
 // Envia sinal a cada 15 minutos
