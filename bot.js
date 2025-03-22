@@ -61,11 +61,6 @@ async function enviarSinal(jogo) {
 
 🔗 *[Jogar Agora!](https://881bet6.com/?id=418518593&currency=BRL&type=2)*
 
-🔗 *Outras Plataformas:* 
-[Plataforma 1](https://www.707bet16.com/?id=296771300&currency=BRL&type=2)
-[Plataforma 2](https://vera.bet.br?ref=c963b06331d8)
-[Plataforma 3](https://4444win11.com/?id=930165648&currency=BRL&type=2)
-
 ⚠️ *Aposte com consciência!*
 
 ⏰ *Horários pagos hoje:*
@@ -81,9 +76,26 @@ ${horarios}
 
 🎯 *Lembre-se: jogo tem riscos e pode trazer vício e perdas de bens. Não jogue o que não pode perder. Proibido para menores de 18 anos. Jogo de azar não tem garantia de ganhos.* 🎯`;
 
+  // Criar os botões de inline para as plataformas
+  const botoes = [
+    [
+      { text: 'Plataforma 1', url: 'https://www.707bet16.com/?id=296771300&currency=BRL&type=2' },
+      { text: 'Plataforma 2', url: 'https://vera.bet.br?ref=c963b06331d8' },
+    ],
+    [
+      { text: 'Plataforma 3', url: 'https://4444win11.com/?id=930165648&currency=BRL&type=2' }
+    ]
+  ];
+
   try {
-    // Envia a foto do jogo com a mensagem
-    await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
+    // Envia a foto do jogo com a mensagem e os botões de inline
+    await bot.sendPhoto(chatId, jogo.imagem, {
+      caption: mensagem,
+      parse_mode: 'Markdown',
+      reply_markup: {
+        inline_keyboard: botoes
+      }
+    });
   } catch (error) {
     console.error('Erro ao enviar sinal:', error);
   }
