@@ -19,11 +19,23 @@ function gerarRecomendacao() {
   return frases[Math.floor(Math.random() * frases.length)];
 }
 
+// Função para gerar horários aleatórios
+function gerarHorariosAleatorios() {
+  const horarios = [];
+  const quantidadeHorarios = 6; // Quantidade de horários que vão aparecer
+  let horaAtual = 9; // Início às 09h
+  for (let i = 0; i < quantidadeHorarios; i++) {
+    const minutos = Math.floor(Math.random() * 12) * 5; // minutos múltiplos de 5
+    const horaFormatada = `${horaAtual.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
+    horarios.push(horaFormatada);
+    horaAtual += Math.floor(Math.random() * 2) + 2; // Avança entre 2 e 3 horas
+    if (horaAtual > 22) break; // Não passar de 22h
+  }
+  return horarios.join(' | ');
+}
+
 // Função para enviar o sinal com informações do jogo
 async function enviarSinal(jogo) {
-  // Link fixo da plataforma que será enviado sempre, independentemente do fornecedor
-  const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
-
   const taxa = Math.floor(Math.random() * 20) + 80; // Taxa entre 80% e 100%
   const mensagem = 
 `🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
@@ -42,7 +54,7 @@ async function enviarSinal(jogo) {
 ⚠️ *Aposte com consciência!*
 
 ⏰ *Horários pagos hoje:*
-14:25 | 16:50 | 19:40 | 22:10
+${gerarHorariosAleatorios()}
 
 ✨ *Não deixe passar essa oportunidade! O lucro está a um clique de distância!* ✨
 
@@ -52,10 +64,11 @@ async function enviarSinal(jogo) {
 3. **Banca baixa? Jogue com calma!** Não deixe a ganância te levar.
 4. **Repita o processo** até sair a cartinha e o prêmio! 💰
 
-🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯`;
+🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯
+⚠️ *Proibido para menores de 18 anos. Não jogue se for fazer falta.*🚫
+🙅‍♂️*Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️`;
 
   try {
-    // Envia a foto do jogo com a mensagem
     await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
   } catch (error) {
     console.error('Erro ao enviar sinal:', error);
@@ -66,8 +79,6 @@ async function enviarSinal(jogo) {
 function gerarSinaisAutomaticos() {
   try {
     const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
-
-    // Escolhe 1 jogo aleatório para cada execução (ou envie todos se quiser)
     const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
     enviarSinal(jogoAleatorio);
   } catch (error) {
@@ -75,8 +86,8 @@ function gerarSinaisAutomaticos() {
   }
 }
 
-// Envia sinal a cada 15 minutos
-setInterval(gerarSinaisAutomaticos, 1 * 60 * 1000);
+// Envia sinal a cada 15 minutos (ou altere o tempo se quiser)
+setInterval(gerarSinaisAutomaticos, 15 * 60 * 1000);
 
-// Também pode rodar manualmente se quiser:
+// Também roda imediatamente ao iniciar
 gerarSinaisAutomaticos();
