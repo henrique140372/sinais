@@ -20,7 +20,7 @@ function gerarRecomendacao() {
 }
 
 // Função para enviar o sinal com informações do jogo
-async function enviarSinal(jogo) {
+async function enviarSinal(jogo, links) {
   // Link fixo da plataforma que será enviado sempre, independentemente do fornecedor
   const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
 
@@ -57,8 +57,15 @@ async function enviarSinal(jogo) {
 🙅‍♂️Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️`;
 
   try {
-    // Envia a foto do jogo com a mensagem
+    // Enviar foto do jogo com a mensagem
     await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
+
+    // Enviar múltiplos links, se houver
+    if (links && links.length > 0) {
+      const linksMessage = links.map(link => `🔗 *[Clique aqui para acessar](${link})*`).join('\n');
+      await bot.sendMessage(chatId, linksMessage, { parse_mode: 'Markdown' });
+    }
+
   } catch (error) {
     console.error('Erro ao enviar sinal:', error);
   }
@@ -71,7 +78,15 @@ function gerarSinaisAutomaticos() {
 
     // Escolhe 1 jogo aleatório para cada execução (ou envie todos se quiser)
     const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
-    enviarSinal(jogoAleatorio);
+
+    // Links adicionais que podem ser enviados junto com a mensagem
+    const linksAdicionais = [
+      'https://link1.com',
+      'https://link2.com',
+      'https://link3.com'
+    ];
+
+    enviarSinal(jogoAleatorio, linksAdicionais);
   } catch (error) {
     console.error('Erro ao ler ou processar os jogos:', error);
   }
