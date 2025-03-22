@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 const express = require('express');
+require('dotenv').config();  // Adicionando suporte para variáveis de ambiente
 
 // Carregar variáveis de ambiente
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
@@ -131,8 +132,9 @@ ${plataforma.indicacao.map(ind => `- ${ind.nivel}: ${ind.percentual}`).join('\n'
       ];
 
       try {
-        // Envia a plataforma com o link, descrição e bônus
-        await bot.sendMessage(chatId, mensagemPlataforma, {
+        // Envia a plataforma com o link, descrição e bônus, incluindo a imagem
+        await bot.sendPhoto(chatId, plataforma.imagem, {
+          caption: mensagemPlataforma,
           parse_mode: 'Markdown',
           reply_markup: {
             inline_keyboard: botoesPlataforma
