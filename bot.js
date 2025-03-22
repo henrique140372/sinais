@@ -1,10 +1,12 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 
+// Carregar variáveis de ambiente
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_GROUP_IDS;
-const bot = new TelegramBot(telegramToken);
+const bot = new TelegramBot(telegramToken, { polling: true });
 
+// Função para gerar recomendações aleatórias
 function gerarRecomendacao() {
   const frases = [
     '⚡ *Aproveite agora e entre forte!* 💥',
@@ -17,13 +19,14 @@ function gerarRecomendacao() {
   return frases[Math.floor(Math.random() * frases.length)];
 }
 
+// Função para enviar o sinal com informações do jogo
 async function enviarSinal(jogo) {
   // Link fixo da plataforma que será enviado sempre, independentemente do fornecedor
   const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
 
-  const taxa = Math.floor(Math.random() * 20) + 80; // taxa entre 80% e 100%
+  const taxa = Math.floor(Math.random() * 20) + 80; // Taxa entre 80% e 100%
   const mensagem = 
-🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
+`🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
 
 🎮 *Jogo:* ${jogo.nome}
 🏢 *Fornecedor:* ${jogo.fornecedor} ${jogo.fornecedor === 'pgsoft' ? '🍀' : jogo.fornecedor === 'spribe' ? '🚀' : '🍌'}
@@ -49,22 +52,30 @@ async function enviarSinal(jogo) {
 3. **Banca baixa? Jogue com calma!** Não deixe a ganância te levar.
 4. **Repita o processo** até sair a cartinha e o prêmio! 💰
 
-🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯
-;
+🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯`;
 
-  // Envia a foto do jogo com a mensagem
-  await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
+  try {
+    // Envia a foto do jogo com a mensagem
+    await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
+  } catch (error) {
+    console.error('Erro ao enviar sinal:', error);
+  }
 }
 
+// Função para gerar sinais automáticos
 function gerarSinaisAutomaticos() {
-  const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
+  try {
+    const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
 
-  // Escolhe 1 jogo aleatório para cada execução (ou envie todos se quiser)
-  const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
-  enviarSinal(jogoAleatorio);
+    // Escolhe 1 jogo aleatório para cada execução (ou envie todos se quiser)
+    const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
+    enviarSinal(jogoAleatorio);
+  } catch (error) {
+    console.error('Erro ao ler ou processar os jogos:', error);
+  }
 }
 
-// Envia sinal a cada 15 minutos:
+// Envia sinal a cada 15 minutos
 setInterval(gerarSinaisAutomaticos, 15 * 60 * 1000);
 
 // Também pode rodar manualmente se quiser:
