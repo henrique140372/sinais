@@ -6,6 +6,13 @@ const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_GROUP_IDS;
 const bot = new TelegramBot(telegramToken, { polling: true });
 
+// Links fixos para a plataforma
+const links = {
+  link1: 'https://881bet6.com/?id=418518593&currency=BRL&type=2',
+  link2: 'https://www.707bet19.com/?id=296771300&currency=BRL&type=2',
+  link3: 'https://vera.bet.br?ref=c963b06331d8',
+};
+
 // Função para gerar recomendações aleatórias
 function gerarRecomendacao() {
   const frases = [
@@ -21,9 +28,6 @@ function gerarRecomendacao() {
 
 // Função para enviar o sinal com informações do jogo
 async function enviarSinal(jogo) {
-  // Link fixo da plataforma que será enviado sempre, independentemente do fornecedor
-  const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
-
   const taxa = Math.floor(Math.random() * 20) + 80; // Taxa entre 80% e 100%
   const mensagem = 
 `🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
@@ -52,7 +56,13 @@ async function enviarSinal(jogo) {
 3. **Banca baixa? Jogue com calma!** Não deixe a ganância te levar.
 4. **Repita o processo** até sair a cartinha e o prêmio! 💰
 
-🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯`;
+🎯 *Lembre-se: jogue na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯
+
+🔗 *[Acesse a primeira plataforma](${links.link2})*  
+🔗 *[Acesse a segunda plataforma](${links.link3})*
+
+⚠️ *Proibido para menores de 18 anos. Não jogue se for fazer falta.🚫
+🙅‍♂️Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️`;
 
   try {
     // Envia a foto do jogo com a mensagem
@@ -67,7 +77,7 @@ function gerarSinaisAutomaticos() {
   try {
     const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
 
-    // Escolhe 1 jogo aleatório para cada execução (ou envie todos se quiser)
+    // Escolhe 1 jogo aleatório para cada execução
     const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
     enviarSinal(jogoAleatorio);
   } catch (error) {
