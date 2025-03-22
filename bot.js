@@ -4,7 +4,7 @@ const express = require('express');
 const fs = require('fs');
 const TelegramBot = require('node-telegram-bot-api');
 const app = express();
-const port = process.env.PORT || 3000; // Usa a variável de ambiente PORT ou a porta 3000
+const port = process.env.PORT || 10000; // Usa a variável de ambiente PORT ou a porta 3000
 
 // Variáveis de ambiente do Telegram Bot
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
