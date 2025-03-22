@@ -1,15 +1,10 @@
-require('dotenv').config(); // Carregar as variáveis do arquivo .env
-
-const express = require('express');
-const fs = require('fs');
 const TelegramBot = require('node-telegram-bot-api');
-const app = express();
-const port = process.env.PORT || 10000; // Usa a variável de ambiente PORT ou a porta 3000
+const fs = require('fs');
 
 // Variáveis de ambiente do Telegram Bot
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_GROUP_IDS;
-const bot = new TelegramBot(telegramToken, { polling: true });
+const bot = new TelegramBot(telegramToken);
 
 // Função para gerar uma recomendação aleatória
 function gerarRecomendacao() {
@@ -26,14 +21,18 @@ function gerarRecomendacao() {
 
 // Função para gerar a mensagem com base no jogo
 function gerarMensagem(jogo) {
+  // Links fixos da plataforma (agora podemos adicionar múltiplos links)
   const linksPlataformas = [
     'https://881bet6.com/?id=418518593&currency=BRL&type=2',
     'https://vera.bet.br?ref=c963b06331d8',
     'https://www.707bet19.com/?id=296771300&currency=BRL&type=2',
   ];
-  const linkFinal = linksPlataformas[Math.floor(Math.random() * linksPlataformas.length)];
+  const linkFinal = linksPlataformas[Math.floor(Math.random() * linksPlataformas.length)]; // Escolhe um link aleatório
+
+  // Gera uma taxa aleatória entre 80% e 100%
   const taxa = Math.floor(Math.random() * 20) + 80;
 
+  // Personaliza a mensagem com base no fornecedor do jogo
   let recomendacao;
   if (jogo.fornecedor === 'pgsoft') {
     recomendacao = '🎉 *O fornecedor PGSoft está bombando!* 🍀';
@@ -81,36 +80,24 @@ function gerarMensagem(jogo) {
 
 // Função para enviar sinal com informações do jogo
 async function enviarSinal(jogo) {
-  try {
-    const mensagem = gerarMensagem(jogo);
-    await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
-  } catch (error) {
-    console.error('Erro ao enviar sinal:', error);
-  }
+  const mensagem = gerarMensagem(jogo);
+
+  // Envia a foto do jogo com a mensagem
+  await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
 }
 
 // Função para gerar sinais automáticos
 function gerarSinaisAutomaticos() {
-  try {
-    const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
-    const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
-    enviarSinal(jogoAleatorio);
-  } catch (error) {
-    console.error('Erro ao ler jogos coletados:', error);
-  }
+  // Lê os jogos coletados do arquivo JSON
+  const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
+
+  // Escolhe 1 jogo aleatório para cada execução (ou envia todos se preferir)
+  const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
+  enviarSinal(jogoAleatorio);
 }
 
 // Envia sinal a cada 15 minutos
 setInterval(gerarSinaisAutomaticos, 1 * 60 * 1000);
 
-// Configura um servidor HTTP simples
-app.get('/', (req, res) => {
-  res.send('Bot está rodando!');
-});
-
-app.listen(port, () => {
-  console.log(`Servidor HTTP rodando na porta ${port}`);
-});
-
-// Rodando os sinais automáticos manualmente
+// Também pode rodar manualmente se desejar
 gerarSinaisAutomaticos();
