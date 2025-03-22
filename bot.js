@@ -81,6 +81,9 @@ ${horarios}
     [
       { text: 'Plataforma 3', url: 'https://4444win11.com/?id=930165648&currency=BRL&type=2' },
       { text: 'Plataforma 4', url: 'https://www.73bet26.com/?id=125201387&currency=BRL&type=2' },
+    ],
+    [
+      { text: 'Lançamento bonus de 15', url: 'https://bet7477.com/?param=2-PQCKCBON' },
     ]
   ];
 
