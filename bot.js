@@ -19,25 +19,38 @@ function gerarRecomendacao() {
   return frases[Math.floor(Math.random() * frases.length)];
 }
 
-// Função para enviar o sinal com informações do jogo
-async function enviarSinal(jogo) {
-  // Link fixo da plataforma que será enviado sempre, independentemente do fornecedor
-  const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
+// Função para gerar a mensagem com base no jogo
+function gerarMensagem(jogo) {
+  const linksPlataformas = [
+    'https://881bet6.com/?id=418518593&currency=BRL&type=2',
+    'https://vera.bet.br?ref=c963b06331d8',
+    'https://www.707bet19.com/?id=296771300&currency=BRL&type=2',
+  ];
+  const linkFinal = linksPlataformas[Math.floor(Math.random() * linksPlataformas.length)];
+  const taxa = Math.floor(Math.random() * 20) + 80;
 
-  const taxa = Math.floor(Math.random() * 20) + 80; // Taxa entre 80% e 100%
-  const mensagem = 
-`🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
+  let recomendacao;
+  if (jogo.fornecedor === 'pgsoft') {
+    recomendacao = '🎉 *O fornecedor PGSoft está bombando!* 🍀';
+  } else if (jogo.fornecedor === 'spribe') {
+    recomendacao = '🚀 *Spribe está acelerando a jogada!* 🔥';
+  } else {
+    recomendacao = '🍌 *Fornecedor genérico, mas bom para uma aposta tranquila!* 🎯';
+  }
+
+  const mensagem = `
+🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
 
 🎮 *Jogo:* ${jogo.nome}
 🏢 *Fornecedor:* ${jogo.fornecedor} ${jogo.fornecedor === 'pgsoft' ? '🍀' : jogo.fornecedor === 'spribe' ? '🚀' : '🍌'}
 📊 *Chance de acerto:* ${taxa}% 😎
-💡 *Recomendação:* _${gerarRecomendacao()}_
+💡 *Recomendação:* _${gerarRecomendacao()}_ 
 
 🚨 *Plataforma com bônus de 15 para NOVOS USUÁRIOS!* E paga *MUITO* 🔥💸
 
 ⚡ *Depósito Mínimo: 10 BRL* 💵
 
-🔗 *[Jogar Agora!](https://881bet6.com/?id=418518593&currency=BRL&type=2)*
+🔗 *[Jogar Agora!](${linkFinal})*
 
 ⚠️ *Aposte com consciência!*
 
@@ -52,24 +65,33 @@ async function enviarSinal(jogo) {
 3. **Banca baixa? Jogue com calma!** Não deixe a ganância te levar.
 4. **Repita o processo** até sair a cartinha e o prêmio! 💰
 
-🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯`;
+🎯 *Lembre-se: jogue na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯
 
+⚠️ *Proibido para menores de 18 anos. Não jogue se for fazer falta.🚫
+🙅‍♂️Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️
+`;
+
+  return mensagem;
+}
+
+// Função para enviar o sinal
+async function enviarSinal(jogo) {
   try {
     // Envia a foto do jogo com a mensagem
-    await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
+    await bot.sendPhoto(chatId, jogo.imagem, { caption: gerarMensagem(jogo), parse_mode: 'Markdown' });
   } catch (error) {
     console.error('Erro ao enviar sinal:', error);
   }
 }
 
 // Função para gerar sinais automáticos
-function gerarSinaisAutomaticos() {
+async function gerarSinaisAutomaticos() {
   try {
     const jogosColetados = JSON.parse(fs.readFileSync('jogos_coletados.json', 'utf8'));
 
     // Escolhe 1 jogo aleatório para cada execução (ou envie todos se quiser)
     const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
-    enviarSinal(jogoAleatorio);
+    await enviarSinal(jogoAleatorio);
   } catch (error) {
     console.error('Erro ao ler ou processar os jogos:', error);
   }
