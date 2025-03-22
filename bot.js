@@ -33,11 +33,20 @@ function gerarHorarios() {
 
 // Função para enviar o sinal com informações do jogo
 async function enviarSinal(jogo) {
-  // Link fixo da plataforma que será enviado sempre, independentemente do fornecedor
+  // Link fixo da plataforma principal
   const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
+  
+  // Outros links de plataformas que você deseja incluir
+  const outrosLinks = [
+    'https://www.707bet16.com/?id=296771300&currency=BRL&type=2',
+    'https://vera.bet.br?ref=c963b06331d8',
+    'https://4444win11.com/?id=930165648&currency=BRL&type=2',
+  ];
 
   const taxa = Math.floor(Math.random() * 20) + 80; // Taxa entre 80% e 100%
   const horarios = gerarHorarios(); // Gerar horários aleatórios
+
+  // Construir a mensagem incluindo múltiplos links de plataformas
   const mensagem = 
 `🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
 
@@ -51,6 +60,11 @@ async function enviarSinal(jogo) {
 ⚡ *Depósito Mínimo: 10 BRL* 💵
 
 🔗 *[Jogar Agora!](https://881bet6.com/?id=418518593&currency=BRL&type=2)*
+
+🔗 *Outras Plataformas:* 
+[Plataforma 1](https://www.707bet16.com/?id=296771300&currency=BRL&type=2)
+[Plataforma 2](https://vera.bet.br?ref=c963b06331d8)
+[Plataforma 3](https://4444win11.com/?id=930165648&currency=BRL&type=2)
 
 ⚠️ *Aposte com consciência!*
 
