@@ -20,7 +20,7 @@ function gerarRecomendacao() {
 }
 
 // Função para enviar o sinal com informações do jogo
-async function enviarSinal(jogo, links) {
+async function enviarSinal(jogo) {
   // Link fixo da plataforma que será enviado sempre, independentemente do fornecedor
   const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
 
@@ -52,20 +52,11 @@ async function enviarSinal(jogo, links) {
 3. **Banca baixa? Jogue com calma!** Não deixe a ganância te levar.
 4. **Repita o processo** até sair a cartinha e o prêmio! 💰
 
-🎯 *Lembre-se: jogue na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯
-⚠️ *Proibido para menores de 18 anos. Não jogue se for fazer falta.🚫
-🙅‍♂️Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️`;
+🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯`;
 
   try {
-    // Enviar foto do jogo com a mensagem
+    // Envia a foto do jogo com a mensagem
     await bot.sendPhoto(chatId, jogo.imagem, { caption: mensagem, parse_mode: 'Markdown' });
-
-    // Enviar múltiplos links, se houver
-    if (links && links.length > 0) {
-      const linksMessage = links.map(link => `🔗 *[Clique aqui para acessar](${link})*`).join('\n');
-      await bot.sendMessage(chatId, linksMessage, { parse_mode: 'Markdown' });
-    }
-
   } catch (error) {
     console.error('Erro ao enviar sinal:', error);
   }
@@ -78,15 +69,7 @@ function gerarSinaisAutomaticos() {
 
     // Escolhe 1 jogo aleatório para cada execução (ou envie todos se quiser)
     const jogoAleatorio = jogosColetados[Math.floor(Math.random() * jogosColetados.length)];
-
-    // Links adicionais que podem ser enviados junto com a mensagem
-    const linksAdicionais = [
-      'https://link1.com',
-      'https://link2.com',
-      'https://link3.com'
-    ];
-
-    enviarSinal(jogoAleatorio, linksAdicionais);
+    enviarSinal(jogoAleatorio);
   } catch (error) {
     console.error('Erro ao ler ou processar os jogos:', error);
   }
