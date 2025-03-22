@@ -76,7 +76,7 @@ function gerarSinaisAutomaticos() {
 }
 
 // Envia sinal a cada 15 minutos
-setInterval(gerarSinaisAutomaticos, 15 * 60 * 1000);
+setInterval(gerarSinaisAutomaticos, 1 * 60 * 1000);
 
 // Também pode rodar manualmente se quiser:
 gerarSinaisAutomaticos();
