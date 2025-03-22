@@ -68,8 +68,7 @@ function gerarMensagem(jogo) {
 🎯 *Lembre-se: jogue na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯
 
 ⚠️ *Proibido para menores de 18 anos. Não jogue se for fazer falta.🚫
-🙅‍♂️Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️
-`;
+🙅‍♂️Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️`;
 
   return mensagem;
 }
