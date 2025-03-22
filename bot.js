@@ -4,7 +4,7 @@ const fs = require('fs');
 // Carregar variáveis de ambiente
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_GROUP_IDS;
-const bot = new TelegramBot(telegramToken);
+const bot = new TelegramBot(telegramToken, { polling: true });
 
 // Função para gerar recomendações aleatórias
 function gerarRecomendacao() {
