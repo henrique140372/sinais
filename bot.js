@@ -1,11 +1,10 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
-const bot = new TelegramBot(telegramToken, { polling: true });
 
 // Variáveis de ambiente do Telegram Bot
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_GROUP_IDS;
-const bot = new TelegramBot(telegramToken);
+const bot = new TelegramBot(telegramToken, { polling: true });
 
 // Função para gerar uma recomendação aleatória
 function gerarRecomendacao() {
