@@ -38,21 +38,10 @@ function gerarHorarios() {
 
 // Função para enviar o sinal com informações do jogo
 async function enviarSinal(jogo) {
-  // Link fixo da plataforma principal
-  const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
-  
-  // Outros links de plataformas que você deseja incluir
-  const outrosLinks = [
-    'https://www.707bet16.com/?id=296771300&currency=BRL&type=2',
-    'https://vera.bet.br?ref=c963b06331d8',
-    'https://4444win11.com/?id=930165648&currency=BRL&type=2',
-    'https://www.73bet26.com/?id=125201387&currency=BRL&type=2',
-  ];
-
   const taxa = Math.floor(Math.random() * 20) + 80; // Taxa entre 80% e 100%
   const horarios = gerarHorarios(); // Gerar horários aleatórios
 
-  // Construir a mensagem incluindo múltiplos links de plataformas
+  // Construir a mensagem com os dados do jogo
   const mensagem = 
 `🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
 
@@ -82,7 +71,7 @@ ${horarios}
 
 🎯 *Lembre-se: jogo tem riscos e pode trazer vício e perdas de bens. Não jogue o que não pode perder. Proibido para menores de 18 anos. Jogo de azar não tem garantia de ganhos.* 🎯`;
 
-  // Criar os botões de inline para as plataformas
+  // Botões fixos de plataformas
   const botoes = [
     [
       { text: 'Plataforma 1', url: 'https://www.707bet16.com/?id=296771300&currency=BRL&type=2' },
@@ -108,6 +97,56 @@ ${horarios}
   }
 }
 
+// Função para enviar os dados do plataforma.json
+async function enviarPlataformas() {
+  try {
+    const dados = JSON.parse(fs.readFileSync('plataforma.json', 'utf8'));
+    const plataformas = dados.plataformas;
+
+    plataformas.forEach(async (plataforma) => {
+      const mensagemPlataforma = `🚀 *Plataforma:* ${plataforma.nome}
+🌐 *Link:* [${plataforma.nome}](${plataforma.url})
+
+📢 *Descrição:* ${plataforma.descricao}
+💰 *Depósito Mínimo:* ${plataforma.deposito_minimo}
+💸 *Saques Mínimo:* ${plataforma.saques_minimo}
+💥 *Taxa de Saque:* ${plataforma.taxa_saque}
+📈 *Lucros Diários:* ${plataforma.lucros_diarios}
+
+🎁 *Bônus:*
+${plataforma.bônus.map(bonus => `- ${bonus.nome}: ${bonus.detalhes}`).join('\n')}
+
+🔄 *Indicação:*
+${plataforma.indicacao.map(ind => `- ${ind.nivel}: ${ind.percentual}`).join('\n')}
+
+🔗 *Cadastro:* [Clique aqui para se cadastrar](${plataforma.link_cadastro})
+
+📷 *Imagem:* ${plataforma.imagem}`;
+
+      const botoesPlataforma = [
+        [
+          { text: 'Ir para a plataforma', url: plataforma.url },
+          { text: 'Cadastro', url: plataforma.link_cadastro }
+        ]
+      ];
+
+      try {
+        // Envia a plataforma com o link, descrição e bônus
+        await bot.sendMessage(chatId, mensagemPlataforma, {
+          parse_mode: 'Markdown',
+          reply_markup: {
+            inline_keyboard: botoesPlataforma
+          }
+        });
+      } catch (error) {
+        console.error('Erro ao enviar plataforma:', error);
+      }
+    });
+  } catch (error) {
+    console.error('Erro ao ler plataforma.json:', error);
+  }
+}
+
 // Função para gerar sinais automáticos
 function gerarSinaisAutomaticos() {
   try {
@@ -121,11 +160,15 @@ function gerarSinaisAutomaticos() {
   }
 }
 
-// Envia sinal a cada 15 minutos (1 minuto no exemplo)
-setInterval(gerarSinaisAutomaticos, 1 * 60 * 1000);
+// Envia sinais e plataformas a cada 15 minutos (1 minuto no exemplo)
+setInterval(() => {
+  gerarSinaisAutomaticos();
+  enviarPlataformas();
+}, 1 * 60 * 1000);
 
 // Também pode rodar manualmente se quiser:
 gerarSinaisAutomaticos();
+enviarPlataformas();
 
 // Definir a rota para o servidor Express
 app.listen(port, () => {
