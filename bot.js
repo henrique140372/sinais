@@ -84,6 +84,7 @@ ${horarios}
     ],
     [
       { text: 'Lançamento bonus de 15', url: 'https://bet7477.com/?param=2-PQCKCBON' },
+      { text: 'Uuzzo bonus de 15', url: 'https://uuzzo33.org/?id=520255229&currency=BRL&type=2' },
     ]
   ];
 
