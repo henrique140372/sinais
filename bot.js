@@ -176,7 +176,17 @@ setInterval(() => {
 gerarSinaisAutomaticos();
 enviarPlataformas();
 
-// Definir a rota para o servidor Express
+// Rota principal para verificar se o bot está rodando
+app.get('/', (req, res) => {
+  res.send('Bot está rodando.');
+});
+
+// Mantém o serviço "acordado" no Render
+setInterval(() => {
+  require('https').get(process.env.RENDER_EXTERNAL_URL);
+}, 1 * 60 * 1000); // Pinga a cada 10 minutos (ajustei para 10 minutos)
+
+// Inicia o servidor
 app.listen(port, () => {
   console.log(`Bot ouvindo na porta ${port}`);
 });
