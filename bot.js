@@ -52,7 +52,7 @@ async function enviarSinal(jogo) {
 3. **Banca baixa? Jogue com calma!** Não deixe a ganância te levar.
 4. **Repita o processo** até sair a cartinha e o prêmio! 💰
 
-🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯
+🎯 *Lembre-se: jogue na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯
 ⚠️ *Proibido para menores de 18 anos. Não jogue se for fazer falta.🚫
 🙅‍♂️Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️`;
 
