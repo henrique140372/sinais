@@ -7,6 +7,6 @@
     "axios": "^0.21.1"
   },
   "scripts": {
-    "start": "pm2 start bot.js --name telegram-bot"
+    "start": "pm2 start node bot.js --name telegram-bot"
   }
 }
