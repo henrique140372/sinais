@@ -70,9 +70,6 @@ function gerarMensagem(jogo) {
 ⚠️ *Proibido para menores de 18 anos. Não jogue se for fazer falta.🚫
 🙅‍♂️Os ganhos não são garantidos e vale lembrar: o jogo traz vício e pode levar à falência e perda de bens.* ⚠️`;
 
-  return mensagem;
-}
-
 // Função para enviar o sinal
 async function enviarSinal(jogo) {
   try {
