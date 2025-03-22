@@ -1,0 +1,49 @@
+{
+  "plataformas": [
+    {
+      "id": "1",
+      "nome": "BOB’S ESPONJA INVEST",
+      "url": "https://bobs-esponja.space/register/?invite=1150",
+      "link_cadastro": "https://bobs-esponja.space/register/?invite=1150",
+      "codigo_convite": "1150",
+      "descricao": "Plataforma de investimento com cashback, bônus diários e lucros de 25% a 35% ao dia.",
+      "bônus": [
+        {
+          "nome": "Cashback",
+          "detalhes": "50% de cashback no ato"
+        },
+        {
+          "nome": "Bônus de cadastro",
+          "detalhes": "Ganhe R$5,00 no cadastro"
+        },
+        {
+          "nome": "Check-in diário",
+          "detalhes": "R$2,50 FREE"
+        },
+        {
+          "nome": "Provas de pagamento",
+          "detalhes": "Ganhe de volta os 9% da taxa ao enviar provas de pagamento"
+        }
+      ],
+      "indicacao": [
+        {
+          "nivel": "1º",
+          "percentual": "15%"
+        },
+        {
+          "nivel": "2º",
+          "percentual": "5%"
+        },
+        {
+          "nivel": "3º",
+          "percentual": "3%"
+        }
+      ],
+      "deposito_minimo": "R$5",
+      "saques_minimo": "R$5",
+      "taxa_saque": "9%",
+      "lucros_diarios": "25% a 35% por 11 dias corridos + capital",
+      "imagem": "https://bobs-esponja.space/assets/images/logo.png"
+    }
+  ]
+}
