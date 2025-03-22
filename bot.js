@@ -1,6 +1,8 @@
+require('dotenv').config(); // Carregar as variáveis do arquivo .env
+
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000; // Usa a variável de ambiente PORT ou a porta 3000
 
 // Iniciar o bot
 const TelegramBot = require('node-telegram-bot-api');
@@ -88,15 +90,15 @@ function gerarSinaisAutomaticos() {
 }
 
 // Envia sinal a cada 15 minutos
-setInterval(gerarSinaisAutomaticos, 1 * 60 * 1000);
+setInterval(gerarSinaisAutomaticos, 15 * 60 * 1000);
 
 // Configura um servidor HTTP simples
 app.get('/', (req, res) => {
   res.send('Bot está rodando!');
 });
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Servidor HTTP rodando na porta 3000');
+app.listen(port, () => {
+  console.log(`Servidor HTTP rodando na porta ${port}`);
 });
 
 // Rodando os sinais automáticos manualmente
