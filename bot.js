@@ -19,12 +19,25 @@ function gerarRecomendacao() {
   return frases[Math.floor(Math.random() * frases.length)];
 }
 
+// Função para gerar horários aleatórios
+function gerarHorarios() {
+  const horarios = [];
+  for (let i = 0; i < 5; i++) { // Gera 5 horários aleatórios
+    const hora = Math.floor(Math.random() * (22 - 10 + 1)) + 10; // Horas entre 10h e 22h
+    const minuto = Math.floor(Math.random() * 60); // Minutos aleatórios
+    const horario = `${hora.toString().padStart(2, '0')}:${minuto.toString().padStart(2, '0')}`;
+    horarios.push(horario);
+  }
+  return horarios.join(' | ');
+}
+
 // Função para enviar o sinal com informações do jogo
 async function enviarSinal(jogo) {
   // Link fixo da plataforma que será enviado sempre, independentemente do fornecedor
   const linkFinal = 'https://881bet6.com/?id=418518593&currency=BRL&type=2';
 
   const taxa = Math.floor(Math.random() * 20) + 80; // Taxa entre 80% e 100%
+  const horarios = gerarHorarios(); // Gerar horários aleatórios
   const mensagem = 
 `🎰 *🎯 SINAL AUTOMÁTICO DETECTADO! E essa é quente! 🔥*
 
@@ -42,7 +55,7 @@ async function enviarSinal(jogo) {
 ⚠️ *Aposte com consciência!*
 
 ⏰ *Horários pagos hoje:*
-14:25 | 16:50 | 19:40 | 22:10
+${horarios}
 
 ✨ *Não deixe passar essa oportunidade! O lucro está a um clique de distância!* ✨
 
@@ -52,7 +65,7 @@ async function enviarSinal(jogo) {
 3. **Banca baixa? Jogue com calma!** Não deixe a ganância te levar.
 4. **Repita o processo** até sair a cartinha e o prêmio! 💰
 
-🎯 *Lembre-se: jogo na calma, sem pressa! A paciência vai trazer o prêmio!* 🎯`;
+🎯 *Lembre-se: jogo tem riscos e pode trazer vício e perdas de bens. Não jogue o que não pode perder. Proibido para menores de 18 anos. Jogo de azar não tem garantia de ganhos.* 🎯`;
 
   try {
     // Envia a foto do jogo com a mensagem
@@ -75,7 +88,7 @@ function gerarSinaisAutomaticos() {
   }
 }
 
-// Envia sinal a cada 15 minutos
+// Envia sinal a cada 15 minutos (1 minuto no exemplo)
 setInterval(gerarSinaisAutomaticos, 1 * 60 * 1000);
 
 // Também pode rodar manualmente se quiser:
