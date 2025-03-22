@@ -40,7 +40,7 @@
         }
       ],
       "deposito_minimo": "R$5",
-      "saques_minimo": "R$5",
+      "saques_minimo": "R$10",
       "taxa_saque": "9%",
       "lucros_diarios": "25% a 35% por 11 dias corridos + capital",
       "imagem": "img/bobesponja.jpg"
