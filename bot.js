@@ -41,6 +41,7 @@ async function enviarSinal(jogo) {
     'https://www.707bet16.com/?id=296771300&currency=BRL&type=2',
     'https://vera.bet.br?ref=c963b06331d8',
     'https://4444win11.com/?id=930165648&currency=BRL&type=2',
+    'https://www.73bet26.com/?id=125201387&currency=BRL&type=2',
   ];
 
   const taxa = Math.floor(Math.random() * 20) + 80; // Taxa entre 80% e 100%
@@ -83,7 +84,8 @@ ${horarios}
       { text: 'Plataforma 2', url: 'https://vera.bet.br?ref=c963b06331d8' },
     ],
     [
-      { text: 'Plataforma 3', url: 'https://4444win11.com/?id=930165648&currency=BRL&type=2' }
+      { text: 'Plataforma 3', url: 'https://4444win11.com/?id=930165648&currency=BRL&type=2' },
+      { text: 'Plataforma 4', url: 'https://www.73bet26.com/?id=125201387&currency=BRL&type=2' },
     ]
   ];
 
