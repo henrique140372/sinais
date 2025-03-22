@@ -1,10 +1,15 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
+const express = require('express');
 
 // Carregar variáveis de ambiente
 const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_GROUP_IDS;
 const bot = new TelegramBot(telegramToken, { polling: true });
+
+// Criando servidor express para escutar em uma porta
+const app = express();
+const port = process.env.PORT || 1000;  // Configura a porta para 1000 ou variável do Render
 
 // Função para gerar recomendações aleatórias
 function gerarRecomendacao() {
@@ -121,3 +126,8 @@ setInterval(gerarSinaisAutomaticos, 1 * 60 * 1000);
 
 // Também pode rodar manualmente se quiser:
 gerarSinaisAutomaticos();
+
+// Definir a rota para o servidor Express
+app.listen(port, () => {
+  console.log(`Bot ouvindo na porta ${port}`);
+});
