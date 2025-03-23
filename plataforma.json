@@ -44,6 +44,54 @@
       "taxa_saque": "9%",
       "lucros_diarios": "25% a 35% por 11 dias corridos + capital",
       "imagem": "img/bobesponja.jpg"
+    },
+    {
+      "id": "2",
+      "nome": "APP MILE AI GANHE FAZENDO TAREFAS E CONVIDANDO",
+      "url": "https://aimile.net/m_register?invite_code=6935",
+      "link_cadastro": "https://aimile.net/m_register?invite_code=6935",
+      "codigo_convite": "6935",
+      "descricao": "Plataforma de tarefas para novos usuários com bônus variados e comissões diárias.",
+      "tarefas_bonus": [
+        {
+          "nome": "Tarefas do WhatsApp, Telegram e Textra",
+          "comissao": "R$3,00",
+          "horario": "Início às 10:00 - Válido por 120 minutos"
+        },
+        {
+          "nome": "Tarefa do Textra",
+          "comissao": "R$0,50",
+          "horario": "Início às 12:00 - Válido por 120 minutos"
+        },
+        {
+          "nome": "Tarefa do Textra",
+          "comissao": "R$0,50",
+          "horario": "Início às 14:00 - Válido por 120 minutos"
+        },
+        {
+          "nome": "Tarefa do Textra",
+          "comissao": "R$0,50",
+          "horario": "Início às 16:00 - Válido por 120 minutos"
+        },
+        {
+          "nome": "Tarefas do WhatsApp, Telegram e Textra",
+          "comissao": "R$2,00",
+          "horario": "Início às 18:00 - Válido por 120 minutos"
+        },
+        {
+          "nome": "Tarefa do Textra",
+          "comissao": "R$0,50",
+          "horario": "Início às 20:00"
+        },
+        {
+          "nome": "Tarefas do WhatsApp, Telegram e Textra",
+          "comissao": "R$2,00",
+          "horario": "Válido por 120 minutos"
+        }
+      ],
+      "renda_total": "R$9,00",
+      "observacao": "Horário de Brasília",
+      "imagem": "img/mileai.jpg"
     }
   ],
   "lançamento": {
