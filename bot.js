@@ -165,15 +165,15 @@ function gerarSinaisAutomaticos() {
   }
 }
 
-// Envia sinais e plataformas a cada 15 minutos (1 minuto no exemplo)
+// Envia sinais e informações a cada 15 minutos (1 minuto no exemplo)
 setInterval(() => {
   gerarSinaisAutomaticos();
-  enviarPlataformas();
+  enviarInformacoes(); // Corrigido para chamar enviarInformacoes
 }, 1 * 60 * 1000);
 
 // Também pode rodar manualmente se quiser:
 gerarSinaisAutomaticos();
-enviarPlataformas();
+enviarInformacoes(); // Corrigido para chamar enviarInformacoes
 
 // Rota principal para verificar se o bot está rodando
 app.get('/', (req, res) => {
