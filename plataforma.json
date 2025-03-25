@@ -7,6 +7,38 @@
       "bonus": "Ganhe R$5,00 no cadastro",
       "imagem": "img/bobesponja.jpg",
       "descricao": "Aplicativo de investimento com cashback e bônus diários."
+    },
+    {
+      "id": "2",
+      "nome": "APP Reward Pro-India",
+      "url": "https://api.keepad.xyz/share_user_jump?proxy_num=1652863",
+      "bonus": "Ganhe renda extra faça tarefas seja pago via pix ou pagbank pode sacar 1 e 3 10 reais facil",
+      "imagem": "img/Reward Pro-India.jpg",
+      "descricao": "Diversão garantida com jogos rápidos e prêmios instantâneos. ganhe por convida pessoas jogue e ganhe"
+    },
+    {
+      "id": "3",
+      "nome": "APP SLING MONEY CONTA INTERNACIONAL DANDO 15 USD NO CADASTRO",
+      "url": "https://play.google.com/store/apps/details?id=net.avianlabs.app&pcampaignid=web_share",
+      "bonus": "FAÇA SEU CADASTRO GANHE 15 USD PODE SACAR PRA SUA CONTA PIX CODIGO CONVITE:sMDPcy",
+      "imagem": "img/slingmoney.png",
+      "descricao": "FAÇA SEU CADASTRO GANHE 15 USD PODE SACAR PRA SUA CONTA PIX CODIGO CONVITE: sMDPcy."
+    },
+    {
+      "id": "4",
+      "nome": "APP FRUIT FANTASY",
+      "url": "https://play.google.com/store/apps/details?id=com.Fruit.Fantasy.Master&pcampaignid=web_share",
+      "bonus": "APP FRUIT FANTASY TE PAGA PELO PAGBANK POR JOGAR VER ANUNCIO",
+      "imagem": "img/fruitfantasy.png",
+      "descricao": "GANHE UMA RENDA EXTRA COM ESSE APP ACUMULE DIAMANTE PARA PODER FAZER SACAS DE 50 CENTAVOS 1 REAISE MUITO MAIS."
+    },
+    {
+      "id": "5",
+      "nome": "APP SCREW MASTER OUT OF JAM",
+      "url": "https://play.google.com/store/apps/details?id=com.Screw.Master.Jam&pcampaignid=web_share",
+      "bonus": "RETIRE PARAFUSOS E GANHE VIA PAGBANK",
+      "imagem": "img/screwmaster.png",
+      "descricao": "APP MUITO TOP E BOM DE GANHAR RENDA EXTRA JOGANDO ELE."
     }
   ],
   "lançamento": {
