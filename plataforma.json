@@ -14,7 +14,7 @@
       "url": "https://api.keepad.xyz/share_user_jump?proxy_num=1652863",
       "bonus": "Ganhe renda extra faça tarefas seja pago via pix ou pagbank pode sacar 1 e 3 10 reais facil",
       "imagem": "img/Reward Pro-India.jpg",
-      "descricao": "Diversão garantida com jogos rápidos e prêmios instantâneos. ganhe por convida pessoas jogue e ganhe"
+      "descricao": "Diversão garantida com jogos rápidos e prêmios instantâneos. ganhe por convidar pessoas, jogue e ganhe."
     },
     {
       "id": "3",
@@ -28,9 +28,9 @@
       "id": "4",
       "nome": "APP FRUIT FANTASY",
       "url": "https://play.google.com/store/apps/details?id=com.Fruit.Fantasy.Master&pcampaignid=web_share",
-      "bonus": "APP FRUIT FANTASY TE PAGA PELO PAGBANK POR JOGAR VER ANUNCIO",
+      "bonus": "APP FRUIT FANTASY TE PAGA PELO PAGBANK POR JOGAR VER ANÚNCIO",
       "imagem": "img/fruitfantasy.png",
-      "descricao": "GANHE UMA RENDA EXTRA COM ESSE APP ACUMULE DIAMANTE PARA PODER FAZER SACAS DE 50 CENTAVOS 1 REAISE MUITO MAIS."
+      "descricao": "GANHE UMA RENDA EXTRA COM ESSE APP, ACUMULE DIAMANTE PARA PODER FAZER SAQUES DE 50 CENTAVOS, 1 REAL E MUITO MAIS."
     },
     {
       "id": "5",
@@ -38,16 +38,27 @@
       "url": "https://play.google.com/store/apps/details?id=com.Screw.Master.Jam&pcampaignid=web_share",
       "bonus": "RETIRE PARAFUSOS E GANHE VIA PAGBANK",
       "imagem": "img/screwmaster.png",
-      "descricao": "APP MUITO TOP E BOM DE GANHAR RENDA EXTRA JOGANDO ELE."
+      "descricao": "APP MUITO TOP E BOM DE GANHAR RENDA EXTRA JOGANDO."
     }
   ],
-  "lançamento": {
-    "bonus_cadastro": "15 DE BÔNUS NO CADASTRO",
-    "rolove_25x": "ROLOLVE 25X",
-    "somente_slots_pg_soft": "SOMENTE SLOTS PG SOFT",
-    "saca_free": "SACA FREE COM 200,00",
-    "deposito_saque_minimo": "AO DEPOSITAR 10 O SAQUE MIN CAI PRA 20",
-    "link": "https://bet7477.com/?param=2-PQCKCBON",
-    "imagem": "img/lucroappbrasil.png"
-  }
+  "lancamentos": [
+    {
+      "bonus_cadastro": "15 DE BÔNUS NO CADASTRO",
+      "rolove_25x": "ROLOLVE 25X",
+      "somente_slots_pg_soft": "SOMENTE SLOTS PG SOFT",
+      "saca_free": "SACA FREE COM 200,00",
+      "deposito_saque_minimo": "AO DEPOSITAR 10 O SAQUE MÍN CAI PRA 20",
+      "link": "https://bet7477.com/?param=2-PQCKCBON",
+      "imagem": "img/lucroappbrasil.png"
+    },
+    {
+      "bonus_cadastro": "IVANBET LANÇAMENTO",
+      "rolove_25x": "ROLOLVE 25X",
+      "somente_slots_pg_soft": "DANDO BÔNUS: DEPOSITE 5, GANHE 10 - TOP DO MOMENTO",
+      "saca_free": "SÓ RECOLHE BÔNUS APÓS RECARGA, LUCRO GARANTIDO",
+      "deposito_saque_minimo": "DEPÓSITO DE 5, GANHE +10",
+      "link": "https://ivanbet.fun/?id=AF128d6&currency=BRL&type=2",
+      "imagem": "img/ivanbet.jpg"
+    }
+  ]
 }
