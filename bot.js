@@ -103,54 +103,63 @@ ${horarios}
 }
 
 // Função para enviar os dados do plataforma.json
-async function enviarInformacoes() {
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const enviarInformacoes = async () => {
   try {
-    // Verifique se o arquivo existe
     if (!fs.existsSync('plataforma.json')) {
-      console.error('O arquivo plataforma.json não foi encontrado.');
+      console.error('Arquivo plataforma.json não encontrado.');
       return;
     }
 
     const dados = JSON.parse(fs.readFileSync('plataforma.json', 'utf8'));
     const aplicativos = dados.aplicativos;
-    const lancamento = dados.lançamento;
+    const lancamentos = dados.lancamentos;
 
-    // Enviar informações sobre aplicativos
-    const enviosAplicativos = aplicativos.map(async (aplicativo) => {
+    // Enviando aplicativos
+    for (const aplicativo of aplicativos) {
       const mensagemAplicativo = `📱 *${aplicativo.nome}*
 🌐 *Link:* [Baixar](${aplicativo.url})
 💰 *Bônus:* ${aplicativo.bonus}
-📝 *Descrição:* ${aplicativo.descricao}
-📷 *Imagem:* ${aplicativo.imagem}`;
+📝 *Descrição:* ${aplicativo.descricao}`;
 
       try {
         await bot.sendPhoto(chatId, aplicativo.imagem, {
           caption: mensagemAplicativo,
           parse_mode: 'Markdown',
         });
+        await sleep(2000);
       } catch (error) {
-        console.error(`Erro ao enviar aplicativo ${aplicativo.nome}:`, error);
+        console.error(`Erro ao enviar o app ${aplicativo.nome}:`, error);
       }
-    });
+    }
 
-    // Aguarda o envio de todos os aplicativos
-    await Promise.all(enviosAplicativos);
+    // Enviando cada lançamento
+    for (const lancamento of lancamentos) {
+      const mensagemLancamento = `🎉 *${lancamento.bonus_cadastro}*
+🔄 *Rollover:* ${lancamento.rolove_25x}
+🎰 *Slots:* ${lancamento.somente_slots_pg_soft}
+💵 *Saque Free:* ${lancamento.saca_free}
+📉 *Depósito/Saque mínimo:* ${lancamento.deposito_saque_minimo}
+🔗 *Link:* [Acesse aqui](${lancamento.link})`;
 
-    // Enviar informações do lançamento
-    const mensagemLancamento = `🎉 *Lançamento Especial!*
-💰 *Bônus de Cadastro:* ${lancamento.bonus_cadastro}
-🔗 *Link:* [Acesse aqui](${lancamento.link})
-📷 *Imagem:* ${lancamento.imagem}`;
+      try {
+        await bot.sendPhoto(chatId, lancamento.imagem, {
+          caption: mensagemLancamento,
+          parse_mode: 'Markdown',
+        });
+        await sleep(2000);
+      } catch (error) {
+        console.error(`Erro ao enviar lançamento ${lancamento.bonus_cadastro}:`, error);
+      }
+    }
 
-    await bot.sendPhoto(chatId, lancamento.imagem, {
-      caption: mensagemLancamento,
-      parse_mode: 'Markdown',
-    });
+    console.log('✅ Todos os aplicativos e lançamentos foram enviados!');
 
   } catch (error) {
-    console.error('Erro ao ler ou processar plataforma.json:', error);
+    console.error('Erro geral no envio:', error);
   }
-}
+};
 
 // Função para gerar sinais automáticos
 function gerarSinaisAutomaticos() {
