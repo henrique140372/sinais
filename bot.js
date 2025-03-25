@@ -103,53 +103,52 @@ ${horarios}
 }
 
 // Função para enviar os dados do plataforma.json
-async function enviarPlataformas() {
+async function enviarInformacoes() {
   try {
+    // Verifique se o arquivo existe
+    if (!fs.existsSync('plataforma.json')) {
+      console.error('O arquivo plataforma.json não foi encontrado.');
+      return;
+    }
+
     const dados = JSON.parse(fs.readFileSync('plataforma.json', 'utf8'));
-    const plataformas = dados.plataformas;
+    const aplicativos = dados.aplicativos;
+    const lancamento = dados.lançamento;
 
-    plataformas.forEach(async (plataforma) => {
-      const mensagemPlataforma = `🚀 *Plataforma:* ${plataforma.nome}
-🌐 *Link:* [${plataforma.nome}](${plataforma.url})
-
-📢 *Descrição:* ${plataforma.descricao}
-💰 *Depósito Mínimo:* ${plataforma.deposito_minimo}
-💸 *Saques Mínimo:* ${plataforma.saques_minimo}
-💥 *Taxa de Saque:* ${plataforma.taxa_saque}
-📈 *Lucros Diários:* ${plataforma.lucros_diarios}
-
-🎁 *Bônus:*
-${plataforma.bônus.map(bonus => `- ${bonus.nome}: ${bonus.detalhes}`).join('\n')}
-
-🔄 *Indicação:*
-${plataforma.indicacao.map(ind => `- ${ind.nivel}: ${ind.percentual}`).join('\n')}
-
-🔗 *Cadastro:* [Clique aqui para se cadastrar](${plataforma.link_cadastro})
-
-📷 *Imagem:* ${plataforma.imagem}`;
-
-      const botoesPlataforma = [
-        [
-          { text: 'Ir para a plataforma', url: plataforma.url },
-          { text: 'Cadastro', url: plataforma.link_cadastro }
-        ]
-      ];
+    // Enviar informações sobre aplicativos
+    const enviosAplicativos = aplicativos.map(async (aplicativo) => {
+      const mensagemAplicativo = `📱 *${aplicativo.nome}*
+🌐 *Link:* [Baixar](${aplicativo.url})
+💰 *Bônus:* ${aplicativo.bonus}
+📝 *Descrição:* ${aplicativo.descricao}
+📷 *Imagem:* ${aplicativo.imagem}`;
 
       try {
-        // Envia a plataforma com o link, descrição e bônus, incluindo a imagem
-        await bot.sendPhoto(chatId, plataforma.imagem, {
-          caption: mensagemPlataforma,
+        await bot.sendPhoto(chatId, aplicativo.imagem, {
+          caption: mensagemAplicativo,
           parse_mode: 'Markdown',
-          reply_markup: {
-            inline_keyboard: botoesPlataforma
-          }
         });
       } catch (error) {
-        console.error('Erro ao enviar plataforma:', error);
+        console.error(`Erro ao enviar aplicativo ${aplicativo.nome}:`, error);
       }
     });
+
+    // Aguarda o envio de todos os aplicativos
+    await Promise.all(enviosAplicativos);
+
+    // Enviar informações do lançamento
+    const mensagemLancamento = `🎉 *Lançamento Especial!*
+💰 *Bônus de Cadastro:* ${lancamento.bonus_cadastro}
+🔗 *Link:* [Acesse aqui](${lancamento.link})
+📷 *Imagem:* ${lancamento.imagem}`;
+
+    await bot.sendPhoto(chatId, lancamento.imagem, {
+      caption: mensagemLancamento,
+      parse_mode: 'Markdown',
+    });
+
   } catch (error) {
-    console.error('Erro ao ler plataforma.json:', error);
+    console.error('Erro ao ler ou processar plataforma.json:', error);
   }
 }
 
